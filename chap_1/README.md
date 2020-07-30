@@ -9,6 +9,6 @@ s = 'Garbage Collection'
 ```
 
 근데 사실 문자열 객체 'Garbage Collection'에 s라는 이름이 붙은 것 !
-  안되는거같은데
+   안되는거같은데
 
 
