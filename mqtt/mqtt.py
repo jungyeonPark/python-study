@@ -1,5 +1,3 @@
-
-
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: MIT-0
 
@@ -13,9 +11,9 @@ CLIENT_ID = "babo"
 PATH_TO_CERT = "certificates/3536b3cc1d-certificate.pem.crt"
 PATH_TO_KEY = "certificates/3536b3cc1d-private.pem.key"
 PATH_TO_ROOT = "certificates/root.pem"
-MESSAGE = "parkjungyeon babo"
+MESSAGE = ord("a")
 TOPIC = "test/testing"
-RANGE = 20
+RANGE = 20 
 
 myAWSIoTMQTTClient = AWSIoTPyMQTT.AWSIoTMQTTClient(CLIENT_ID)
 myAWSIoTMQTTClient.configureEndpoint(ENDPOINT, 8883)
@@ -24,10 +22,11 @@ myAWSIoTMQTTClient.configureCredentials(PATH_TO_ROOT, PATH_TO_KEY, PATH_TO_CERT)
 myAWSIoTMQTTClient.connect()
 print('Begin Publish')
 for i in range (RANGE):
-    data = "{} [{}]".format(MESSAGE, i+1)
+    data = "{} [{}]".format(chr(MESSAGE), i+1)
     message = {"message" : data}
-    myAWSIoTMQTTClient.publish(TOPIC, json.dumps(message), 1) 
+    myAWSIoTMQTTClient.publish(TOPIC, json.dumps(message), 0) 
     print("Published: '" + json.dumps(message) + "' to the topic: " + "'test/testing'")
     t.sleep(0.1)
+    MESSAGE += 1
 print('Publish End')
 myAWSIoTMQTTClient.disconnect()
